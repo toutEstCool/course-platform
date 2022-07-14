@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
 import { GenreModule } from './genre/genre.module';
 import { FileModule } from './file/file.module';
+import { MentorModule } from './mentor/mentor.module';
 
 @Module({
 	imports: [
@@ -21,6 +22,7 @@ import { FileModule } from './file/file.module';
 		UserModule,
 		GenreModule,
 		FileModule,
+		MentorModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
