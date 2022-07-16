@@ -34,10 +34,22 @@ export class MentorService {
 
 		// Aggregations
 
-		return this.MentorModel.find(options)
-			.select('-updatedAt -__v')
+		return this.MentorModel.aggregate()
+			.match(options)
+			.lookup({
+				from: 'Movie',
+				localField: '_id',
+				foreignField: 'mentors',
+				as: 'movies',
+			})
+			.addFields({
+				countMovies: {
+					$size: '$movies',
+				},
+			})
+			.project({ __v: 0, updatedAt: 0, movies: 0 })
 			.sort({
-				createdAt: 'desc',
+				createdAt: -1,
 			})
 			.exec()
 	}
